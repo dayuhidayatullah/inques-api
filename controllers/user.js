@@ -1,33 +1,35 @@
-const { User } = require("../models");
-const { generateToken } = require("../helpers/jwt");
-const { comparePassword } = require("../helpers/bcrypt");
+const { user } = require("../models");
+const { generateToken } = require("../helpers/jwt.js");
+const { comparePassword, hashPassword } = require("../helpers/bcrpt.js");
+const { Users } = require("../models");
+const { Op } = require("sequelize");
+// const users = require("../models/users.js");
 
 class UserController {
-  static register(req, res, next) {
-    const { email, password } = req.body;
-    User.create(
-      {
-        email,
-        password,
-      },
-      { returning: true }
-    )
-      .then((user) => {
-        res.status(201).json({
-          id: user.id,
-          email: user.email,
-        });
-      })
-      .catch((err) => {
-        next(err);
-      });
-  }
+  // static register(req, res, next) {
+  //   const { email, password } = req.body;
+  //   User.create(
+  //     {
+  //       email,
+  //       password,
+  //     },
+  //     { returning: true }
+  //   )
+  //     .then((user) => {
+  //       res.status(201).json({
+  //         id: user.id,
+  //         email: user.email,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       next(err);
+  //     });
+  // }
   static async loginAdmin(req, res, next) {
     const email = req.body.email;
-    console.log(req.headers);
     try {
       if (email) {
-        const user = await User.findOne({ where: { email: req.body.email } });
+        const user = await Users.findOne({ where: { email: req.body.email } });
         if (!user) {
           throw {
             name: "InvalidLogin",
@@ -64,14 +66,29 @@ class UserController {
     const email = req.body.email;
     try {
       if (email) {
-        const user = await User.findOne({ where: { email: req.body.email } });
+        const validateEmail = (email) => {
+          return email.match(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          );
+        };
+        const query = validateEmail(email)
+          ? { where: { email } }
+          : { where: { name: email } };
+        const user = await Users.findOne(query);
+        const hash = await hashPassword(req.body.password);
+        hashPassword(req.body.password).then((data) => {
+          console.info(data, "<<< data");
+        });
+        const comparePass = await comparePassword(
+          req.body.password,
+          user.password
+        );
         if (!user) {
-          console.log("masuk email kosong");
           throw {
             name: "InvalidLogin",
             status: 400,
           };
-        } else if (comparePassword(req.body.password, user.password)) {
+        } else if (comparePass) {
           const access_token = generateToken({
             id: user.id,
             email: user.email,
@@ -90,6 +107,7 @@ class UserController {
         };
       }
     } catch (err) {
+      console.info(err, "<<< apa errornya");
       next(err);
     }
   }
