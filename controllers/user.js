@@ -1,8 +1,8 @@
-const { user } = require("../models");
+// const { user } = require("../models");
 const { generateToken } = require("../helpers/jwt.js");
 const { comparePassword, hashPassword } = require("../helpers/bcrpt.js");
 const { Users } = require("../models");
-const { Op } = require("sequelize");
+// const { Op } = require("sequelize");
 // const users = require("../models/users.js");
 
 class UserController {
@@ -75,10 +75,10 @@ class UserController {
           ? { where: { email } }
           : { where: { name: email } };
         const user = await Users.findOne(query);
-        const hash = await hashPassword(req.body.password);
-        hashPassword(req.body.password).then((data) => {
-          console.info(data, "<<< data");
-        });
+        // const hash = await hashPassword(req.body.password);
+        // hashPassword(req.body.password).then((data) => {
+        //   console.info(data, "<<< data");
+        // });
         const comparePass = await comparePassword(
           req.body.password,
           user.password
@@ -92,6 +92,7 @@ class UserController {
           const access_token = generateToken({
             id: user.id,
             email: user.email,
+            username: user.name,
           });
           res.status(200).json({ access_token });
         } else {

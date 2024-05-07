@@ -1,7 +1,8 @@
-var express = require("express");
-var router = express.Router();
-const users = require("./users");
+const express = require("express");
+const router = express.Router();
+const user = require("./users");
+const auction = require("./auction");
 /* GET home page. */
-router.use(users);
-
+router.use(user);
+router.use(auction);
 module.exports = router;
