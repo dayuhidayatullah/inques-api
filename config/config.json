@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "Test123@",
-    "database": "Test",
+    "database": "inques_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

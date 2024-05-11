@@ -3,7 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("sc_ms_respondents", {
-      szQuestionId: {
+      szNetworkId: {
         type: Sequelize.STRING,
       },
       szTerritoryId: {
@@ -69,10 +69,12 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        field: "created_at",
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        field: "updated_at",
       },
     });
   },

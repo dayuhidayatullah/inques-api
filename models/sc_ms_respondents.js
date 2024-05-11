@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   sc_ms_respondents.init(
     {
-      szQuestionId: DataTypes.STRING,
+      szNetworkId: DataTypes.STRING,
       szTerritoryId: DataTypes.STRING,
       szEmailRespondent: DataTypes.STRING,
       szUsernameRespondent: { type: DataTypes.STRING, primaryKey: true },
@@ -33,6 +33,14 @@ module.exports = (sequelize, DataTypes) => {
       szDistrict: DataTypes.STRING,
       szSubDistrict: DataTypes.STRING,
       decPostalCode: DataTypes.DECIMAL(8, 2),
+      createdAt: {
+        type: DataTypes.DATE,
+        field: "created_at",
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        field: "updated_at",
+      },
     },
     {
       sequelize,

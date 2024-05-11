@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class sc_qs_question extends Model {
     /**
@@ -9,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // this.belongsTo(models.sc_qs_config, { foreignKey: "szQuestionId" });
     }
   }
   sc_qs_question.init(
@@ -25,11 +27,19 @@ module.exports = (sequelize, DataTypes) => {
       szNetworkId: DataTypes.STRING,
       szTerritoryId: DataTypes.STRING,
       bActive: DataTypes.TINYINT(1),
+      createdAt: {
+        type: DataTypes.DATE,
+        field: "created_at",
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        field: "updated_at",
+      },
     },
     {
       sequelize,
       modelName: "sc_qs_question",
-      underscored: true,
+      // underscored: true,
     }
   );
   return sc_qs_question;

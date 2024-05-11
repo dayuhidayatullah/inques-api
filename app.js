@@ -23,6 +23,16 @@ const sequelize = new Sequelize(
     host: "127.0.0.1",
     dialect: "mysql",
     password: process.env.DB_PASSWORD,
+  },
+  {
+    define: {
+      hooks: {
+        beforeFind: (model) => {
+          model.attributes = {};
+          model.attributes.exclude = ["createdAt", "updatedAt"];
+        },
+      },
+    },
   }
 );
 sequelize
