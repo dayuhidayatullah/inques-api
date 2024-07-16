@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      console.info(models, '<<<< apasih')
+      this.belongsTo(models.sc_qs_questions, {foreignKey: 'szQuestionId'})
     }
   }
   sc_qs_configs.init(

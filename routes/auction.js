@@ -3,6 +3,6 @@ var router = express.Router();
 const Auction = require("../controllers/auction");
 
 /* GET users listing. */
-router.get("/auction/private", Auction.PrivateAuction);
+router.get("/private/auction", Auction.PrivateAuction);
 
 module.exports = router;

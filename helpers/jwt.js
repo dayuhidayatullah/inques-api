@@ -5,7 +5,8 @@ function generateToken(payload) {
 }
 
 function verifyToken(token) {
-  return jwt.verify(token, process.env.SECRET_TOKEN);
+  console.info(token.split(' ')[1], '><<<<< token')
+  return jwt.verify(token.split(' ')[1], process.env.SECRET_TOKEN);
 }
 
 module.exports = {
