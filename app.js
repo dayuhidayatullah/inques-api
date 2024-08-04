@@ -17,20 +17,20 @@ require("dotenv").config();
 const { verifyToken } = require("./helpers/jwt");
 const { saveOption } = require("./controllers/option");
 
-const storage = multer.memoryStorage({
-  destination: function (req, file, cb) {
-    console.info(req.body, file, '<<< dah')
-    cb(null, path.join('__dirname', '../uploads/'));
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  }
-});
-const upload = multer({ storage: storage });
-const uploadDir = 'uploads';
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-}
+// const storage = multer.memoryStorage({
+//   destination: function (req, file, cb) {
+//     console.info(req.body, file, '<<< dah')
+//     cb(null, path.join('__dirname', '../uploads/'));
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.originalname);
+//   }
+// });
+//  const upload = multer({ storage: storage });
+// const uploadDir = 'uploads/answerImage';
+// if (!fs.existsSync(uploadDir)) {
+//   fs.mkdirSync(uploadDir);
+// }
 // const sequelize = require("./config/db");
 var app = express();
 // sequelize.sync({ force: true }).then(() => {
@@ -91,7 +91,8 @@ const authMiddleware = (req, res, next) => {
   }
   next();
 };
-app.post('/save-option', upload.array('imgFile[]'), saveOption);
+// app.post('/save-option', upload.array('imgFile[]'), saveOption);
+// app.post('/upload', upload.single('files'))
 // catch 404 and forward to error handler
 // app.use(function (req, res, next) {
 //   next(createError(404));

@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'sc_qs_optionitemnlgs',
+    timestamps: false
   });
   return sc_qs_optionitemnlgs;
 };

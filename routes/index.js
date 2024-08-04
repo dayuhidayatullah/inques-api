@@ -4,9 +4,11 @@ const user = require("./users");
 const auction = require("./auction");
 const survey = require('./survey')
 const admin = require('./admin')
+const upload = require('./upload')
 /* GET home page. */
 router.use(user);
 router.use(auction);
 router.use(survey);
-router.use('/admin', admin);
+router.use(upload);
+router.use('/admin',admin);
 module.exports = router;

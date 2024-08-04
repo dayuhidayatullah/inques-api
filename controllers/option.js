@@ -35,18 +35,30 @@ class Option {
             console.info(err);
         }
     }
-    static async getOptionItems(req, res, next) {
+    static async getOptionItems(payload) {
         try {
             const optionItems = await sc_qs_optionitems.findAll({where: {
-                szOptionId: req.query.szOptionId,
-            }, include: [
-              {model: 'sc_qs_optionitemimage',as: 'OptionItemImages',  where: {szOptionId: req.query.szOptionId}}
-            ]})
-            res.status(200).json({ data: optionItems })
+                szOptionId: payload.szOptionId,
+            }, raw: true
+            })
+            return optionItems
+            // res.status(200).json({ data: optionItems })
         } catch (err) {
             console.info(err);
         }
     }
+    static async getOptionItemNlgs(payload) {
+      try {
+          const optionItemsNlgs = await sc_qs_optionitemnlgs.findAll({where: {
+              szOptionId: payload.szOptionId,
+          }, raw: true
+          })
+          return optionItemsNlgs
+          // res.status(200).json({ data: optionItems })
+      } catch (err) {
+          console.info(err);
+      }
+  }
     static async getOptionItemImage(req, res, next) {
         try {
             console.info(req.query, '<<< params')

@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class sc_tr_answers extends Model {
+  class sc_qs_variables extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,14 +13,15 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  sc_tr_answers.init({
+  sc_qs_variables.init({
     szNetworkId: DataTypes.STRING,
     szTerritoryId: DataTypes.STRING,
-    szEmailRespondent: DataTypes.STRING,
-    szUsernameRespondent: DataTypes.STRING,
-    szQuestionId: DataTypes.STRING,
-    szTrnId: DataTypes.STRING,
-    decDuration: DataTypes.DECIMAL,
+    szVariableId: DataTypes.STRING,
+    szNode1: DataTypes.STRING,
+    szNode2: DataTypes.STRING,
+    decNorma: DataTypes.DECIMAL,
+    szAuthor: DataTypes.STRING,
+    decScale: DataTypes.DECIMAL,
     createdAt: {
       type: DataTypes.DATE,
       field: "created_at",
@@ -31,8 +32,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'sc_tr_answers',
-    // timestamps: false,
+    modelName: 'sc_qs_variables',
+    
   });
-  return sc_tr_answers;
+  return sc_qs_variables;
 };
