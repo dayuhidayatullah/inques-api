@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       // this.belongsTo(models.sc_qs_config, { foreignKey: "szQuestionId" });
       this.hasMany(models.sc_qs_question_items, {foreignKey: 'szQuestionId', as: 'questionItems'})
-      this.hasOne(models.sc_qs_configs, {foreignKey: 'szQuestionId'})
+      this.hasOne(models.sc_qs_configs, {foreignKey: 'szQuestionId', as: "configs"})
       // this.hasMany(models.sc_qs)
     }
   }

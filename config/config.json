@@ -14,10 +14,11 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "heylutco_root",
+    "password": "Inques@123",
+    "database": "heylutco_inques",
+    "host": "localhost",
+    "dialect": "mysql",
+    "use_env_variable": "mysql://heylutco_root:Inques@150@https://willow.jagoanhosting.com:3306/heylutco_inques"
   }
 }
